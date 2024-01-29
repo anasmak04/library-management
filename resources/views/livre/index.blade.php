@@ -43,11 +43,12 @@
 
                 <td class="d-flex gap-3">
                     <a class="btn btn-warning ml-1" href="{{ route('livre.edit', ['livre' => $book]) }}">Edit</a>
-                    <form action="{{ route('livre.delete', ['livre' => $book]) }}" method="post" style="display: inline-block;">
+                    <form class="ml-2" action="{{ route('livre.delete', ['livre' => $book]) }}" method="post" style="display: inline-block;">
                         @csrf
                         @method("delete")
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
+                    <a class="btn btn-primary ml-1" href="http://127.0.0.1:8000/emprunt">reserver</a>
                 </td>
 
             </tr>

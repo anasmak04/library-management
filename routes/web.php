@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmpruntController;
 use App\Http\Controllers\LivreController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,10 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 /// Livre
 Route::get("/", [LivreController::class , "index"])->name("index");
-Route::get("/store", [LivreController::class , "addview"])->name("livre.add");
+Route::get("/store", [LivreController::class , "create"])->name("livre.add");
 Route::post("/", [LivreController::class, "store"])->name("livre.store");
-Route::get("/{livre}", [LivreController::class, "editview"])->name("livre.edit");
+
+// Emprunt
+Route::get("/emprunt", [EmpruntController::class, "add"])->name("emprunt.add");
+Route::post("/emprunt", [EmpruntController::class, "store"])->name("emprunt.store");
+
+// Livre
+Route::get("/{livre}", [LivreController::class, "edit"])->name("livre.edit");
+Route::get("/emprunt", [EmpruntController::class, "showbooks"]);
 Route::put("/{livre}/edit", [LivreController::class, "update"])->name("livre.update");
 Route::delete("/{livre}", [LivreController::class, "destroy"])->name("livre.delete");

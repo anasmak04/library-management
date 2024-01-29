@@ -19,11 +19,10 @@ class EmpruntSeeder extends Seeder
     public function run(): void
     {
         Emprunt::create([
-            "description" => "test reservation",
+            "description" => "a reservation",
             "reservation_date" => "2024/01/29",
             "return_date" => "2024/02/08",
-            "is_returned" => "0",
-            "livre_id" => "1",
+            "livre_id" => "1"
         ]);
     }
 }

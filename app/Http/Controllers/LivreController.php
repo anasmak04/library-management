@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateLivreRequest;
 use App\Models\Livre;
 use Illuminate\Http\Request;
 
@@ -14,44 +15,30 @@ class LivreController extends Controller
     }
 
 
-    public function addview()
+
+    public function create()
     {
         return view("livre/store");
     }
 
-    public function store(Livre $livre ,  Request $request){
-        $data =  $request->validate([
-          "title" => "required",
-          "author" => "required",
-          "genre" => "required",
-          "description" => "required",
-          "publication_year" => "required",
-          "total_copies" => "required",
-          "available_copies" => "required",
-        ]);
+    public function store(Livre $livre ,  UpdateLivreRequest $request){
 
-        $livre::create($data);
+        $livre::create($request->all());
         return redirect()->route("index");
     }
 
-    public function editview(Livre $livre){
+    public function edit(Livre $livre){
         return view("livre/edit" , compact("livre"));
     }
 
-    public function update(Livre $livre , Request $request)
+    public function show(Livre $livre)
     {
-        $data =  $request->validate([
-            "title" => "required",
-            "author" => "required",
-            "genre" => "required",
-            "description" => "required",
-            "publication_year" => "required",
-            "total_copies" => "required",
-            "available_copies" => "required",
-        ]);
+        return view("livre/show", compact("livre"));
+    }
 
-        $livre->update($data);
-
+    public function update(Livre $livre , UpdateLivreRequest $request)
+    {
+        $livre->update($request->all());
         return redirect()->route("index");
     }
 
