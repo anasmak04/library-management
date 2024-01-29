@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string("description");
             $table->date("reservation_date");
             $table->date("return_date");
-            $table->boolean("is_returned");
+            $table->integer("is_returned");
+            $table->foreignId("livre_id")->constrained()->onDelete("cascade");
             $table->timestamps();
         });
     }
