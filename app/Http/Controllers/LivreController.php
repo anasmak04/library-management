@@ -15,7 +15,6 @@ class LivreController extends Controller
     }
 
 
-
     public function create()
     {
         return view("livre/store");

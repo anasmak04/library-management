@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\EmpruntController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivreController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+Auth::routes();
 
 
 /// Livre
@@ -30,3 +35,6 @@ Route::get("/{livre}", [LivreController::class, "edit"])->name("livre.edit");
 Route::get("/emprunt", [EmpruntController::class, "showbooks"]);
 Route::put("/{livre}/edit", [LivreController::class, "update"])->name("livre.update");
 Route::delete("/{livre}", [LivreController::class, "destroy"])->name("livre.delete");
+
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
