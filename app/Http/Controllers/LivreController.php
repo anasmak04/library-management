@@ -8,11 +8,22 @@ use Illuminate\Http\Request;
 
 class LivreController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $livres = Livre::all();
-        return view("livre/index", compact("livres"));
+        $searchTerm = $request->input('search');
+
+        if ($searchTerm) {
+            $livres = Livre::where('title', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('author', 'LIKE', "%{$searchTerm}%")
+                ->orWhere("", "LIKE", "%{$searchTerm}%")
+            ->paginate(5);
+        } else {
+            $livres = Livre::paginate(5);
+        }
+
+        return view("livre/index", compact("livres", "searchTerm"));
     }
+
 
 
     public function create()
@@ -23,6 +34,7 @@ class LivreController extends Controller
     public function store(Livre $livre ,  UpdateLivreRequest $request){
 
         $livre::create($request->all());
+        session()->flash('success', 'Nouveau livre ajouté avec succès!');
         return redirect()->route("index");
     }
 
@@ -45,9 +57,9 @@ class LivreController extends Controller
     public function destroy(Livre $livre)
     {
         $livre->delete();
+        session()->flash('success', 'livre a ete suppreme avec succès!');
         return redirect()->route("index");
     }
-
 
 
 

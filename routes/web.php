@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::delete("/utilisateurs/{user}", [UserController::class , "destroy"])->name("user.delete");
-
+Route::get("/utilisateurs/{user}/edit", [UserController::class, "edit"])->name("user.edit");
+Route::put("/utilisateurs/{user}", [UserController::class, "update"])->name("user.update");
 Route::get("/utilisateurs", [UserController::class , "index"])->name("users");
 
 Route::delete("/{livre}", [LivreController::class, "destroy"])->name("livre.delete");

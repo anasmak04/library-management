@@ -5,17 +5,50 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <title>gestion des livres</title>
     </head>
     <body>
 
     @extends('layouts.app')
     @section('content')
+        @if(session('success'))
+            <script>
+                Swal.fire({
+                    title: 'Succès!',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+        @endif
+        @if (session('error'))
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Supprimé!',
+                    text: '{{ session('error') }}',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+        @endif
+
 
         <div class="container mt-5">
             <h2>Liste des Livres</h2>
-            @if(auth()->user() && auth()->user()->hasRole("admin"))
+
+            <form action="{{ route('index') }}" method="GET">
+                <div class="form-group row d-flex justify-content-center align-items-center">
+                    <div class="col-8">
+                        <input type="text" name="search" class="form-control" placeholder="Search for a book..." value="{{ request()->search }}">
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary mb-3 mt-3">Search</button>
+                    </div>
+                </div>
+            </form>
+
+
+        @if(auth()->user() && auth()->user()->hasRole("admin"))
             <a class="btn btn-success mb-4" href="{{route("livre.add")}}">add new book</a>
             @endif
                 <table class="table">
@@ -60,8 +93,12 @@
                 @endforeach
                 </tbody>
             </table>
+            {{$livres->links()}}
         </div>
     @endsection
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     </body>
     </html>
