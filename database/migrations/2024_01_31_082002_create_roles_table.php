@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('livres', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->string("author");
-            $table->string("genre");
-            $table->string("description");
-            $table->date("publication_year");
-            $table->integer("total_copies");
-            $table->integer("available_copies");
+            $table->string("name");
             $table->timestamps();
         });
     }
@@ -27,9 +21,8 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-
     public function down(): void
     {
-        Schema::dropIfExists('livres');
+        Schema::dropIfExists('roles');
     }
 };
