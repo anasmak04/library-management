@@ -49,7 +49,7 @@
                             <form class="ml-2" action="{{ route('livre.delete', ['livre' => $book]) }}" method="post" style="display: inline-block;">
                                 @csrf
                                 @method("delete")
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit"  class="btn btn-danger">Delete</button>
                             </form>
                             @endif
                                 @if(auth()->user() && (auth()->user()->hasRole('user') || auth()->user()->hasRole('admin')))

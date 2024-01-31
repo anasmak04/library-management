@@ -11,7 +11,6 @@ class LivreController extends Controller
     public function index()
     {
         $livres = Livre::all();
-
         return view("livre/index", compact("livres"));
     }
 
@@ -41,6 +40,14 @@ class LivreController extends Controller
         $livre->update($request->all());
         return redirect()->route("index");
     }
+
+
+    public function destroy(Livre $livre)
+    {
+        $livre->delete();
+        return redirect()->route("index");
+    }
+
 
 
 
