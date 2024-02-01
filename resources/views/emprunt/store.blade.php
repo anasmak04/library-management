@@ -26,10 +26,7 @@
                                     <input type="text" class="form-control" id="description" name="description" required>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="reservation_date">Reservation Date</label>
-                                    <input type="date" class="form-control" id="reservation_date" name="reservation_date" required>
-                                </div>
+
 
                                 <div class="form-group">
                                     <label for="return_date">Return Date</label>

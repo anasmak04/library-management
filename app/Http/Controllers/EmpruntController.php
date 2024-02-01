@@ -19,10 +19,11 @@ class EmpruntController extends Controller
     {
         $data = $request->validate([
             "description" => "required",
-            "reservation_date" => "required",
             "return_date" => "required",
             "livre_id" => "required"
         ]);
+
+        $data["reservation_date"] = now();
 
         $userId = auth()->id();
 
