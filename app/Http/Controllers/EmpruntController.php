@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEmpruntRequest;
 use App\Models\Emprunt;
 use App\Models\Livre;
 use Illuminate\Http\Request;
@@ -23,31 +24,21 @@ class EmpruntController extends Controller
         return view("emprunt/store");
     }
 
-    public function store(Request $request, Livre $livre)
+    public function store(StoreEmpruntRequest $request, Livre $livre)
     {
-        $data = $request->validate([
-            "description" => "required",
-            "livre_id" => "required"
-        ]);
-
+        $data = $request->validated();
 
         $data["reservation_date"] = now();
         $data["return_date"] = now()->addDays(15);
-
         $userId = auth()->id();
-
         $data['user_id'] = $userId;
-
-
         $livre = Livre::find($data['livre_id']);
-
         if ($livre && $livre->available_copies > 0) {
             $livre->decrement("available_copies");
             Emprunt::create($data);
         }
 
         return redirect()->route("index");
-
     }
 
     public function destroy(Emprunt $emprunt)
