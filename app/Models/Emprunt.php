@@ -14,5 +14,14 @@ class Emprunt extends Model
         return $this->hasMany(Emprunt::class , "livre_id");
     }
 
-    protected $fillable = ["description", "reservation_date" , "return_date", "is_returned", "livre_id"];
+
+    public function user()
+    {
+        return $this->hasMany(User::class , "user_id");
+    }
+
+
+
+    protected $fillable = ["description", "reservation_date" , "return_date", "is_returned", "livre_id", "user_id"];
+
 }

@@ -11,7 +11,6 @@
 </head>
 <body>
 @extends('layouts.app')
-
 @section("content")
         <div class="container">
             <div class="row justify-content-center">
@@ -21,6 +20,7 @@
                         <div class="card-body">
                             <form method="POST" action="{{route("emprunt.store")}}">
                                 @csrf
+
                                 <div class="form-group">
                                     <label for="description">Description</label>
                                     <input type="text" class="form-control" id="description" name="description" required>
@@ -39,8 +39,8 @@
                                 <div class="form-group">
                                     <label for="livre_id">Livre</label>
                                     <select class="form-control" id="livre_id" name="livre_id">
-                                        @foreach($livres as $livre)  Assuming you pass a collection of livres to the view
-                                        <option value="{{ $livre->id }}">{{ $livre->title }}</option>  Replace title with appropriate field
+                                        @foreach($livres as $livre)
+                                        <option value="{{ $livre->id }}">{{ $livre->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>

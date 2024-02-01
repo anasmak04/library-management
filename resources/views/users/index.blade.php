@@ -16,6 +16,17 @@
     <div class="container mt-5">
         <h2>Liste des utilisateurs</h2>
 
+        <form action="{{ route('users') }}" method="GET">
+            <div class="form-group row d-flex justify-content-center align-items-center">
+                <div class="col-8">
+                    <input type="text" name="search" class="form-control" placeholder="Search for a user..." value="{{ request()->search }}">
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary mb-3 mt-3">Search</button>
+                </div>
+            </div>
+        </form>
+
             <a class="btn btn-success mb-4" href="">ajouter nouveau utilisateur</a>
 
         <table class="table">
@@ -47,7 +58,7 @@
             @endforeach
             </tbody>
         </table>
-
+    {{$users->links()}}
 
     </div>
 @endsection

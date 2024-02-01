@@ -30,7 +30,8 @@ Route::delete("/{livre}", [LivreController::class, "destroy"])->name("livre.dele
 /// Livre
 Route::get("/", [LivreController::class , "index"])->name("index");
 Route::get("/store", [LivreController::class , "create"])->name("livre.add");
-Route::post("/", [LivreController::class, "store"])->name("livre.store");
+Route::post('/', [LivreController::class, 'store']);
+
 
 // Emprunt
 Route::get("/emprunt", [EmpruntController::class, "add"])->name("emprunt.add");

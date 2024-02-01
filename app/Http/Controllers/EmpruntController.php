@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Emprunt;
 use App\Models\Livre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmpruntController extends Controller
 {
@@ -14,18 +15,34 @@ class EmpruntController extends Controller
         return view("emprunt/store");
     }
 
-    public function store(Emprunt $emprunt , Request $request)
+    public function store(Request $request, Livre $livre)
     {
         $data = $request->validate([
-           "description" => "required",
-           "reservation_date" => "required",
-           "return_date" => "required",
-           "livre_id" => "required",
+            "description" => "required",
+            "reservation_date" => "required",
+            "return_date" => "required",
+            "livre_id" => "required"
         ]);
 
-        $emprunt::create($data);
+        $userId = auth()->id();
+
+        $data['user_id'] = $userId;
+
+
+        $livre = Livre::find($data['livre_id']);
+
+        if ($livre && $livre->available_copies > 0) {
+            $livre->decrement("available_copies");
+            Emprunt::create($data);
+        }
+
         return redirect()->route("index");
+
     }
+
+
+
+
 
     public function showbooks()
     {

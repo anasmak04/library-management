@@ -15,6 +15,9 @@ class Livre extends Model
     }
 
 
+
     protected $fillable = ['title', 'author', 'genre', 'description', 'publication_year', 'total_copies', 'available_copies'];
 
 }
+
+

@@ -9,9 +9,19 @@ class UserController extends Controller
 {
     //
 
-    public function index(User $user)
+
+    public function index(User $user , Request $request)
     {
-        $users = $user::all();
+
+        $searchTerm = $request->input("search");
+        if($searchTerm){
+            $users = $user::WHERE("name", "LIKE", "%$searchTerm%")
+                ->orWhere("email", "LIKE", "%$searchTerm%")
+                ->paginate(2);
+        }else{
+            $users = $user::paginate(2);
+        }
+
         return view("users/index", compact("users"));
     }
 

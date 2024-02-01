@@ -15,7 +15,7 @@ class LivreController extends Controller
         if ($searchTerm) {
             $livres = Livre::where('title', 'LIKE', "%{$searchTerm}%")
             ->orWhere('author', 'LIKE', "%{$searchTerm}%")
-                ->orWhere("", "LIKE", "%{$searchTerm}%")
+                ->orWhere("description", "LIKE", "%{$searchTerm}%")
             ->paginate(5);
         } else {
             $livres = Livre::paginate(5);
@@ -35,6 +35,7 @@ class LivreController extends Controller
 
         $livre::create($request->all());
         session()->flash('success', 'Nouveau livre ajouté avec succès!');
+
         return redirect()->route("index");
     }
 
