@@ -28,10 +28,7 @@
 
 
 
-                                <div class="form-group">
-                                    <label for="return_date">Return Date</label>
-                                    <input type="date" class="form-control" id="return_date" name="return_date" required>
-                                </div>
+
 
                                 <div class="form-group">
                                     <label for="livre_id">Livre</label>

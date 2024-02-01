@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Auth;
 class EmpruntController extends Controller
 {
 
+
+    public function mesReservation()
+    {
+        $res = Auth::user()->reservation;
+        return view("emprunt/index", compact( "res"));
+
+    }
+
     public function add()
     {
         return view("emprunt/store");
@@ -19,11 +27,12 @@ class EmpruntController extends Controller
     {
         $data = $request->validate([
             "description" => "required",
-            "return_date" => "required",
             "livre_id" => "required"
         ]);
 
+
         $data["reservation_date"] = now();
+        $data["return_date"] = now()->addDays(15);
 
         $userId = auth()->id();
 
@@ -40,6 +49,13 @@ class EmpruntController extends Controller
         return redirect()->route("index");
 
     }
+
+    public function destroy(Emprunt $emprunt)
+    {
+        $emprunt->delete();
+        return redirect()->route("emprunt.index")->with('success', 'Reservation deleted successfully');
+    }
+
 
 
 

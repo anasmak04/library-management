@@ -66,6 +66,7 @@
                 </tr>
                 </thead>
                 <tbody>
+
                 @foreach($livres as $book)
                     <tr>
                         <td>{{$book->id}}</td>

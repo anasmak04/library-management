@@ -10,7 +10,6 @@ class Emprunt extends Model
     use HasFactory;
 
 
-
     public function Emprunt()
     {
         return $this->hasMany(Emprunt::class , "livre_id");
