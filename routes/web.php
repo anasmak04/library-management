@@ -21,13 +21,21 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::resource('utilisateurs', UserController::class);
+Route::middleware(["auth", "checkrole:admin"])->group(function (){
+    Route::resource('utilisateurs', UserController::class);
+});
+
+
 Route::resource('livres', LivreController::class);
+
 
 Route::resource('emprunts', EmpruntController::class)->only(['index', 'store', 'destroy']);
 
+
+Route::middleware(["auth", "checkrole:admin,user"])->group(function (){
+    Route::get('/emprunts/res', [EmpruntController::class, 'index'])->name('emprunts.reservation');
+});
 Route::get('/emprunts/add', [EmpruntController::class, 'add'])->name('emprunts.add');
-Route::get('/emprunts/res', [EmpruntController::class, 'index'])->name('emprunts.reservation');
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
