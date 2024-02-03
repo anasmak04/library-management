@@ -16,7 +16,7 @@
     <div class="container mt-5">
         <h2>Liste des utilisateurs</h2>
 
-        <form action="{{ route('users') }}" method="GET">
+        <form action="{{ route('utilisateurs.index') }}" method="GET">
             <div class="form-group row d-flex justify-content-center align-items-center">
                 <div class="col-8">
                     <input type="text" name="search" class="form-control" placeholder="Search for a user..." value="{{ request()->search }}">
@@ -46,8 +46,10 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td class="d-flex gap-3">
-                            <a class="btn btn-warning ml-1" href="{{route("user.edit", ["user" => $user])}}">Edit</a>
-                        <form class="ml-2" action="{{ route('user.delete', ['user' => $user]) }}" method="post" style="display: inline-block;">
+
+                            <a class="btn btn-warning ml-1" href="{{route("utilisateurs.edit", $user)}}">Edit</a>
+
+                        <form class="ml-2" action="{{ route('utilisateurs.destroy', $user) }}" method="post" style="display: inline-block;">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger">Delete</button>

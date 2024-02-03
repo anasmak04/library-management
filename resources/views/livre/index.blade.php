@@ -36,7 +36,7 @@
         <div class="container mt-5">
             <h2>Liste des Livres</h2>
 
-            <form action="{{ route('index') }}" method="GET">
+            <form action="{{ route('livres.index') }}" method="GET">
                 <div class="form-group row d-flex justify-content-center align-items-center">
                     <div class="col-8">
                         <input type="text" name="search" class="form-control" placeholder="Search for a book..." value="{{ request()->search }}">
@@ -49,7 +49,7 @@
 
 
         @if(auth()->user() && auth()->user()->hasRole("admin"))
-            <a class="btn btn-success mb-4" href="{{route("livre.add")}}">add new book</a>
+            <a class="btn btn-success mb-4" href="{{route("livres.create")}}">add new book</a>
             @endif
                 <table class="table">
                 <thead>
@@ -79,15 +79,15 @@
                         <td>{{$book->available_copies}}</td>
                         <td class="d-flex gap-3">
                             @if(auth()->user() && auth()->user()->hasRole("admin"))
-                            <a class="btn btn-warning ml-1" href="{{ route('livre.edit', ['livre' => $book]) }}">Edit</a>
-                            <form class="ml-2" action="{{ route('livre.delete', ['livre' => $book]) }}" method="post" style="display: inline-block;">
+                            <a class="btn btn-warning ml-1" href="{{ route('livres.show', ['livre' => $book]) }}">Edit</a>
+                            <form class="ml-2" action="{{ route('livres.destroy', ['livre' => $book]) }}" method="post" style="display: inline-block;">
                                 @csrf
                                 @method("delete")
                                 <button type="submit"  class="btn btn-danger">Delete</button>
                             </form>
                             @endif
                                 @if(auth()->user() && (auth()->user()->hasRole('user') || auth()->user()->hasRole('admin')))
-                                <a class="btn btn-primary ml-1" href="http://127.0.0.1:8000/emprunt">reserver</a>
+                                <a class="btn btn-primary ml-1" href="{{route("emprunts.add")}}">reserver</a>
                                 @endif
                         </td>
                     </tr>

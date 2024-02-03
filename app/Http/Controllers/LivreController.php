@@ -16,9 +16,9 @@ class LivreController extends Controller
             $livres = Livre::where('title', 'LIKE', "%{$searchTerm}%")
             ->orWhere('author', 'LIKE', "%{$searchTerm}%")
                 ->orWhere("description", "LIKE", "%{$searchTerm}%")
-            ->paginate(5);
+            ->paginate(4);
         } else {
-            $livres = Livre::paginate(5);
+            $livres = Livre::paginate(4);
 
         }
 
@@ -35,7 +35,7 @@ class LivreController extends Controller
     public function store(Livre $livre ,  UpdateLivreRequest $request){
 
         $livre::create($request->all());
-        return redirect()->route("index")->with('success', 'Nouveau livre ajouté avec succès!');
+        return redirect()->route("livres.index")->with('success', 'Nouveau livre ajouté avec succès!');
     }
 
     public function edit(Livre $livre){
@@ -44,20 +44,20 @@ class LivreController extends Controller
 
     public function show(Livre $livre)
     {
-        return view("livre/show", compact("livre"));
+        return view("livre/edit", compact("livre"));
     }
 
     public function update(Livre $livre , UpdateLivreRequest $request)
     {
         $livre->update($request->all());
-        return redirect()->route("index");
+        return redirect()->route("livres.index");
     }
 
 
     public function destroy(Livre $livre)
     {
         $livre->delete();
-        return redirect()->route("index")->with('success', 'livre a ete suppreme avec succès!');
+        return redirect()->route("livres.index")->with('success', 'livre a ete suppreme avec succès!');
     }
 
 

@@ -21,29 +21,13 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::delete("/utilisateurs/{user}", [UserController::class , "destroy"])->name("user.delete");
-Route::get("/utilisateurs/{user}/edit", [UserController::class, "edit"])->name("user.edit");
-Route::put("/utilisateurs/{user}", [UserController::class, "update"])->name("user.update");
-Route::get("/utilisateurs", [UserController::class , "index"])->name("users");
+Route::resource('utilisateurs', UserController::class);
+Route::resource('livres', LivreController::class);
 
-Route::delete("/{livre}", [LivreController::class, "destroy"])->name("livre.delete");
+Route::resource('emprunts', EmpruntController::class)->only(['index', 'store', 'destroy']);
 
-/// Livre
-Route::get("/", [LivreController::class , "index"])->name("index");
-Route::get("/store", [LivreController::class , "create"])->name("livre.add");
-Route::post('/', [LivreController::class, 'store'])->name("livre.store");
+Route::get('/emprunts/add', [EmpruntController::class, 'add'])->name('emprunts.add');
+Route::get('/emprunts/res', [EmpruntController::class, 'index'])->name('emprunts.reservation');
 
 
-// Emprunt
-Route::get("/emprunt", [EmpruntController::class, "add"])->name("emprunt.add");
-Route::post("/emprunt", [EmpruntController::class, "store"])->name("emprunt.store");
-Route::get("/emprunt/res", [EmpruntController::class , "mesReservation"])->name("emprunt.index");
-Route::delete("/emprunt/res/{emprunt}", [EmpruntController::class, "destroy"])->name("emprunt.destroy");
-
-// Livre
-Route::get("/{livre}", [LivreController::class, "edit"])->name("livre.edit");
-Route::get("/emprunt", [EmpruntController::class, "showbooks"]);
-Route::put("/{livre}/edit", [LivreController::class, "update"])->name("livre.update");
-
-//users
 Route::get('/home', [HomeController::class, 'index'])->name('home');

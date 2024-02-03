@@ -12,7 +12,10 @@ class EmpruntController extends Controller
 {
 
 
-    public function mesReservation()
+
+
+
+    public function index()
     {
         $res = Auth::user()->reservation;
         return view("emprunt/index", compact( "res"));
@@ -21,8 +24,10 @@ class EmpruntController extends Controller
 
     public function add()
     {
-        return view("emprunt/store");
+        $livres = Livre::all(); // Fetch all livres
+        return view("emprunt/store", compact('livres'));
     }
+
 
     public function store(StoreEmpruntRequest $request, Livre $livre)
     {
@@ -38,13 +43,13 @@ class EmpruntController extends Controller
             Emprunt::create($data);
         }
 
-        return redirect()->route("index");
+        return redirect()->route("livres.index");
     }
 
     public function destroy(Emprunt $emprunt)
     {
         $emprunt->delete();
-        return redirect()->route("emprunt.index")->with('success', 'Reservation deleted successfully');
+        return redirect()->route("emprunts.index")->with('success', 'Reservation deleted successfully');
     }
 
 

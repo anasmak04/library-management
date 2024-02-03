@@ -12,13 +12,15 @@
 <body>
 @extends('layouts.app')
 @section("content")
+
+
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 mt-4">
                     <div class="card">
                         <div class="card-header">Emprunt Form</div>
                         <div class="card-body">
-                            <form method="POST" action="{{route("emprunt.store")}}">
+                            <form method="POST" action="{{route("emprunts.store")}}">
                                 @csrf
 
                                 <div class="form-group">

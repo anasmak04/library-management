@@ -13,17 +13,18 @@
     <div class="container mt-5">
         <h2>modifier un utilisateur</h2>
 
-        <form method="post" action="{{route("user.update", ["user" => $user])}}">
+
+        <form method="post" action="{{ route('utilisateurs.update',  $utilisateur) }}">
             @csrf
             @method("put")
 
             <div class="form-group">
                 <label for="title">name</label>
-                <input type="text" value="{{$user->name}}" class="form-control" name="name" id="name" placeholder="Entrer le name">
+                <input type="text" value="{{$utilisateur->name}}" class="form-control" name="name" id="name" placeholder="Entrer le name">
             </div>
             <div class="form-group">
                 <label for="author">email</label>
-                <input type="text" class="form-control" value="{{$user->email}}" name="author" id="author" placeholder="Nom de email">
+                <input type="text" class="form-control" value="{{$utilisateur->email}}" name="author" id="author" placeholder="Nom de email">
             </div>
 
             <button type="submit" class="btn btn-primary m-4">edit</button>

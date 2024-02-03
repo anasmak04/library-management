@@ -25,10 +25,10 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                    <a class="navbar-brand" href="{{route("index")}}">livres</a> &nbsp;&nbsp;&nbsp;
+                    <a class="navbar-brand" href="{{route("livres.index")}}">livres</a> &nbsp;&nbsp;&nbsp;
                 @if(auth()->user() && auth()->user()->hasRole("admin"))
-                <a class="navbar-brand" href="{{route("users")}}">utilisateurs</a>
-                <a class="navbar-brand" href="{{route("users")}}">statistiques</a>
+                <a class="navbar-brand" href="{{route("utilisateurs.index")}}">utilisateurs</a>
+                <a class="navbar-brand" href="{{route("utilisateurs.index")}}">statistiques</a>
                 @endif
                 @if(auth()->user() && auth()->user()->hasRole("user"))
                 <a class="navbar-brand" href="{{route("emprunt.index")}}">mes reservations</a>

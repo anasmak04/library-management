@@ -64,7 +64,7 @@
                     <td>{{$reser->updated_at}}</td>
 
                     <td class="d-flex gap-3">
-                        <form action="{{ route('emprunt.destroy', ['emprunt' => $reser->id]) }}" method="POST">
+                        <form action="{{ route('emprunts.destroy', ['emprunt' => $reser->id]) }}" method="POST">
                             @csrf
                             @method('delete')
                             <button class="btn btn-danger">Delete</button>

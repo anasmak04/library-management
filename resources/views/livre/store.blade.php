@@ -16,7 +16,7 @@
 @section("content")
     <div class="container mt-5">
         <h2>Ajouter un Nouveau Livre</h2>
-        <form method="post" action="{{route("livre.store")}}">
+        <form method="post" action="{{route("livres.store")}}">
             @csrf
 
             <div class="form-group">
