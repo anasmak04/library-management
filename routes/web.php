@@ -35,6 +35,9 @@ Route::resource('emprunts', EmpruntController::class)->only(['index', 'store', '
 Route::middleware(["auth", "checkrole:admin,user"])->group(function (){
     Route::get('/emprunts/res', [EmpruntController::class, 'index'])->name('emprunts.reservation');
 });
+
+
+
 Route::get('/emprunts/add', [EmpruntController::class, 'add'])->name('emprunts.add');
 
 

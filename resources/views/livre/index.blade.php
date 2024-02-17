@@ -48,9 +48,9 @@
             </form>
 
 
-        @if(auth()->user() && auth()->user()->hasRole("admin"))
+{{--        @if(auth()->user() && auth()->user()->hasRole("admin"))--}}
             <a class="btn btn-success mb-4" href="{{route("livres.create")}}">add new book</a>
-            @endif
+{{--            @endif--}}
                 <table class="table">
                 <thead>
                 <tr>
@@ -78,17 +78,17 @@
                         <td>{{$book->total_copies}}</td>
                         <td>{{$book->available_copies}}</td>
                         <td class="d-flex gap-3">
-                            @if(auth()->user() && auth()->user()->hasRole("admin"))
+{{--                            @if(auth()->user() && auth()->user()->hasRole("admin"))--}}
                             <a class="btn btn-warning ml-1" href="{{ route('livres.show', ['livre' => $book]) }}">Edit</a>
                             <form class="ml-2" action="{{ route('livres.destroy', ['livre' => $book]) }}" method="post" style="display: inline-block;">
                                 @csrf
                                 @method("delete")
                                 <button type="submit"  class="btn btn-danger">Delete</button>
                             </form>
-                            @endif
-                                @if(auth()->user() && (auth()->user()->hasRole('user') || auth()->user()->hasRole('admin')))
+{{--                            @endif--}}
+{{--                                @if(auth()->user() && (auth()->user()->hasRole('user') || auth()->user()->hasRole('admin')))--}}
                                 <a class="btn btn-primary ml-1" href="{{route("emprunts.add")}}">reserver</a>
-                                @endif
+{{--                                @endif--}}
                         </td>
                     </tr>
                 @endforeach

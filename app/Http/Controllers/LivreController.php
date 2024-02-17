@@ -6,11 +6,16 @@ use App\Http\Requests\UpdateLivreRequest;
 use App\Models\Livre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class LivreController extends Controller
 {
     public function index(Request $request)
     {
+        abort_if(Gate::denies('book_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+
         $searchTerm = $request->input('search');
         if ($searchTerm) {
             $livres = Livre::where('title', 'LIKE', "%{$searchTerm}%")
